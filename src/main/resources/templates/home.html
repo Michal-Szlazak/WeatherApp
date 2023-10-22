@@ -8,49 +8,79 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="header-container">
-                    <div id="main-header">
-                        <h1>Weather App</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class="container">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-3 column">
-                <div class="location">
-                    <div>
-                        <h4>Search your location</h4>
-                        <form action="#" th:action="@{/geolocation/search}" method="POST">
-
-                            <input type="text" name="location"
-                                   class="form-control col" placeholder="Location"
-                                    th:text="${session.userInput?.address}">
-
-                            <button type="submit" class="btn btn-sm btn-info col">Search</button>
-
-                        </form>
-                    </div>
-                    <div>
-                        <h4>Addresses found</h4>
-                        <form action="#" th:action="@{/weather}" th:object="${locations}" method="POST">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="selectedLocation" id="percentage">
-                                <option th:each="location : ${locations}" th:value="${location}" th:text="${location.address}"></option>
-                            </select>
-                            <button type="submit" class="btn btn-sm btn-info"
-                                    th:disabled="${locations == null || locations?.length == 0}">Check Weather</button>
-                        </form>
-                    </div>
+            <div class="header-container">
+                <div id="main-header">
+                    <h1>Weather App</h1>
                 </div>
             </div>
         </div>
-
     </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-3 column">
+            <div class="location">
+                <div>
+                    <h4>Search your location</h4>
+                    <form action="#" th:action="@{/geolocation/search}" method="POST">
+
+                        <input type="text" name="location"
+                               class="form-control col" placeholder="Location"
+                               th:text="${session.userInput?.address}">
+
+                        <button type="submit" class="btn btn-sm btn-info col">Search</button>
+
+                    </form>
+                </div>
+                <div>
+                    <h4>Addresses found</h4>
+                    <form action="#" th:action="@{/weather}" th:object="${locations}" method="POST">
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="selectedLocation" id="percentage">
+                            <option th:each="location : ${locations}" th:value="${location}" th:text="${location.address}"></option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-info"
+                                th:disabled="${locations == null || locations?.length == 0}">Check Weather</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-9 column">
+            <div class="weather">
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th> Date </th>
+                        <th> Max temp </th>
+                        <th> Min temp </th>
+                        <th> Precipitation prop. </th>
+                        <th> Max wind speed </th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="entry : ${weather?.entrySet}">
+                        <td><a th:text="${entry.key}"></a></td>
+                        <td><a th:text="${entry.value.maxTemperature + '°C'}"></a></td>
+                        <td><a th:text="${entry.value.minTemperature + '°C'}"></a></td>
+                        <td><a th:text="${entry.value.precipitationProbabilityMean + 'mm'}"></a></td>
+                        <td><a th:text="${entry.value.windSpeedMax + 'km/h'}"></a></td>
+                        <td>
+                            <a th:href="" class="btn btn-info btn-sm">
+                                View more
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
 </body>
