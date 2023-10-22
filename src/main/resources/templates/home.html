@@ -69,7 +69,8 @@
                         <td><a th:text="${entry.value.precipitationProbabilityMean + 'mm'}"></a></td>
                         <td><a th:text="${entry.value.windSpeedMax + 'km/h'}"></a></td>
                         <td>
-                            <a th:href="@{/error}" class="btn btn-info btn-sm">
+                            <a th:href="@{/dailyWeather/showForm(date=${entry.key})}"
+                               class="btn btn-info btn-sm">
                                 View more
                             </a>
                         </td>
