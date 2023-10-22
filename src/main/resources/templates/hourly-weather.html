@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="header-container">
+        <div id="main-header">
+          <h1>Weather for <a th:text="${day.date}"></a></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <div class="weather">
+        <h4>General</h4>
+        <table class="table table-bordered">
+          <thead class="table-dark">
+          <tr>
+            <th>Variable</th>
+            <th>Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Max temperature</td>
+            <td><span th:text="${day.maxTemperature + '°C'}"></span></td>
+          </tr>
+          <tr>
+            <td>Min temperature</td>
+            <td><span th:text="${day.minTemperature + '°C'}"></span></td>
+          </tr>
+          <tr>
+            <td>Max apparent temperature</td>
+            <td><span th:text="${day.apparentMaxTemperature + '°C'}"></span></td>
+          </tr>
+          <tr>
+            <td>Min apparent temperature</td>
+            <td><span th:text="${day.apparentMinTemperature + '°C'}"></span></td>
+          </tr>
+          <tr>
+            <td>Precipitation sum</td>
+            <td><span th:text="${day.precipitationSum + 'mm'}"></span></td>
+          </tr>
+          <tr>
+            <td>Rain sum</td>
+            <td><span th:text="${day.rainSum + 'mm'}"></span></td>
+          </tr>
+          <tr>
+            <td>Showers sum</td>
+            <td><span th:text="${day.showersSum + 'mm'}"></span></td>
+          </tr>
+          <tr>
+            <td>Snowfall sum</td>
+            <td><span th:text="${day.snowfallSum + 'mm'}"></span></td>
+          </tr>
+          <tr>
+            <td>Precipitation prob. mean</td>
+            <td><span th:text="${day.precipitationProbabilityMean + 'mm'}"></span></td>
+          </tr>
+          <tr>
+            <td>Sunrise</td>
+            <td><span th:text="${day.sunrise}"></span></td>
+          </tr>
+          <tr>
+            <td>Sunset</td>
+            <td><span th:text="${day.sunset}"></span></td>
+          </tr>
+          <tr>
+            <td>Max wind speed</td>
+            <td><span th:text="${day.windSpeedMax + 'km/h'}"></span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="weather">
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+          <tr>
+            <th> Hour </th>
+            <th> Temp </th>
+            <th> Humidity </th>
+            <th> Apparent temp </th>
+            <th> Pressure </th>
+            <th> Cloud cover </th>
+            <th> Wind Speed</th>
+            <th> Precipitation </th>
+            <th> Visibility </th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr th:each="hour : ${day.hourValues}">
+            <td><span th:text="${hour.time}"></span></td>
+            <td><span th:text="${hour.temperature + '°C'}"></span></td>
+            <td><span th:text="${hour.humidity + '%'}"></span></td>
+            <td><span th:text="${hour.apparentTemperature + '°C'}"></span></td>
+            <td><span th:text="${hour.pressure+ 'hPa'}"></span></td>
+            <td><span th:text="${hour.cloudCover + '%'}"></span></td>
+            <td><span th:text="${hour.windSpeed + 'km/h'}"></span></td>
+            <td><span th:text="${hour.precipitation + 'mm'}"></span></td>
+            <td><span th:text="${hour.visibility + 'm'}"></span></td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+</body>
+</html>
